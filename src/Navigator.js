@@ -26,8 +26,6 @@
  /* eslint-disable no-extra-boolean-cast*/
 'use strict';
 
-var buildStyleInterpolator = require('./buildStyleInterpolator');
-
 import {
   Dimensions,
   PanResponder,
@@ -35,7 +33,6 @@ import {
   StyleSheet,
   TVEventHandler,
   View,
-  ViewPropTypes,
 } from 'react-native';
 
 var AnimationsDebugModule = NativeModules.AnimationsDebugModule;
@@ -54,8 +51,6 @@ var invariant = require('fbjs/lib/invariant');
 var rebound = require('rebound');
 
 var flattenStyle = require('./flattenStyle');
-
-var PropTypes = require('prop-types');
 
 // TODO: this is not ideal because there is no guarantee that the navigator
 // is full screen, however we don't have a good way to measure the actual
@@ -300,101 +295,6 @@ var GESTURE_ACTIONS = [
  * available [scene config options](docs/navigator.html#configurescene).
  */
 var Navigator = createReactClass({
-
-  propTypes: {
-    /**
-     * Optional function where you can configure scene animations and
-     * gestures. Will be invoked with `route` and `routeStack` parameters,
-     * where `route` corresponds to the current scene being rendered by the
-     * `Navigator` and `routeStack` is the set of currently mounted routes
-     * that the navigator could transition to.
-     *
-     * The function should return a scene configuration object.
-     *
-     * ```
-     * (route, routeStack) => Navigator.SceneConfigs.FloatFromRight
-     * ```
-     *
-     * Available scene configuration options are:
-     *
-     *  - Navigator.SceneConfigs.PushFromRight (default)
-     *  - Navigator.SceneConfigs.FloatFromRight
-     *  - Navigator.SceneConfigs.FloatFromLeft
-     *  - Navigator.SceneConfigs.FloatFromBottom
-     *  - Navigator.SceneConfigs.FloatFromBottomAndroid
-     *  - Navigator.SceneConfigs.FadeAndroid
-     *  - Navigator.SceneConfigs.SwipeFromLeft
-     *  - Navigator.SceneConfigs.HorizontalSwipeJump
-     *  - Navigator.SceneConfigs.HorizontalSwipeJumpFromRight
-     *  - Navigator.SceneConfigs.HorizontalSwipeJumpFromLeft
-     *  - Navigator.SceneConfigs.VerticalUpSwipeJump
-     *  - Navigator.SceneConfigs.VerticalDownSwipeJump
-     *
-     */
-    configureScene: PropTypes.func,
-
-    /**
-     * Required function which renders the scene for a given route. Will be
-     * invoked with the `route` and the `navigator` object.
-     *
-     * ```
-     * (route, navigator) =>
-     *   <MySceneComponent title={route.title} navigator={navigator} />
-     * ```
-     */
-    renderScene: PropTypes.func.isRequired,
-
-    /**
-     * The initial route for navigation. A route is an object that the navigator
-     * will use to identify each scene it renders.
-     *
-     * If both `initialRoute` and `initialRouteStack` props are passed to
-     * `Navigator`, then `initialRoute` must be in a route in
-     * `initialRouteStack`. If `initialRouteStack` is passed as a prop but
-     * `initialRoute` is not, then `initialRoute` will default internally to
-     * the last item in `initialRouteStack`.
-     */
-    initialRoute: PropTypes.object,
-
-    /**
-     * Pass this in to provide a set of routes to initially mount. This prop
-     * is required if `initialRoute` is not provided to the navigator. If this
-     * prop is not passed in, it will default internally to an array
-     * containing only `initialRoute`.
-     */
-    initialRouteStack: PropTypes.arrayOf(PropTypes.object),
-
-    /**
-     * Pass in a function to get notified with the target route when
-     * the navigator component is mounted and before each navigator transition.
-     */
-    onWillFocus: PropTypes.func,
-
-    /**
-     * Will be called with the new route of each scene after the transition is
-     * complete or after the initial mounting.
-     */
-    onDidFocus: PropTypes.func,
-
-    /**
-     * Use this to provide an optional component representing a navigation bar
-     * that is persisted across scene transitions. This component will receive
-     * two props: `navigator` and `navState` representing the navigator
-     * component and its state. The component is re-rendered when the route
-     * changes.
-     */
-    navigationBar: PropTypes.node,
-
-    /**
-     * Optionally pass in the navigator object from a parent `Navigator`.
-     */
-    navigator: PropTypes.object,
-
-    /**
-     * Styles to apply to the container of each scene.
-     */
-    sceneStyle: ViewPropTypes.style,
-  },
 
   statics: {
     BreadcrumbNavigationBar: NavigatorBreadcrumbNavigationBar,

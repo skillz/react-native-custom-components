@@ -32,9 +32,7 @@ import {
   Platform,
   StyleSheet,
   View,
-  ViewPropTypes,
 } from 'react-native';
-var PropTypes = require('prop-types');
 
 var guid = require('./guid');
 
@@ -54,20 +52,6 @@ var navStatePresentedIndex = function(navState) {
 };
 
 class NavigatorNavigationBar extends React.Component {
-  static propTypes = {
-    navigator: PropTypes.object,
-    routeMapper: PropTypes.shape({
-      Title: PropTypes.func.isRequired,
-      LeftButton: PropTypes.func.isRequired,
-      RightButton: PropTypes.func.isRequired,
-    }).isRequired,
-    navState: PropTypes.shape({
-      routeStack: PropTypes.arrayOf(PropTypes.object),
-      presentedIndex: PropTypes.number,
-    }),
-    navigationStyles: PropTypes.object,
-    style: ViewPropTypes.style,
-  };
 
   static Styles = NavigatorNavigationBarStyles;
   static StylesAndroid = NavigatorNavigationBarStylesAndroid;

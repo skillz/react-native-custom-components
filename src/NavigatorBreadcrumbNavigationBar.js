@@ -29,7 +29,6 @@ import {
   Platform,
   StyleSheet,
   View,
-  ViewPropTypes,
 } from 'react-native';
 import React from 'react';
 
@@ -45,7 +44,6 @@ const { Map } = require('immutable');
 const Interpolators = NavigatorBreadcrumbNavigationBarStyles.Interpolators;
 const NavigatorNavigationBarStyles = Platform.OS === 'android' ?
   NavigatorNavigationBarStylesAndroid : NavigatorNavigationBarStylesIOS;
-const PropTypes = require('prop-types');
 
 /**
  * Reusable props objects.
@@ -80,26 +78,6 @@ function initStyle(index, presentedIndex) {
 }
 
 class NavigatorBreadcrumbNavigationBar extends React.Component {
-  static propTypes = {
-    navigator: PropTypes.shape({
-      push: PropTypes.func,
-      pop: PropTypes.func,
-      replace: PropTypes.func,
-      popToRoute: PropTypes.func,
-      popToTop: PropTypes.func,
-    }),
-    routeMapper: PropTypes.shape({
-      rightContentForRoute: PropTypes.func,
-      titleContentForRoute: PropTypes.func,
-      iconForRoute: PropTypes.func,
-    }),
-    navState: PropTypes.shape({
-      routeStack: PropTypes.arrayOf(PropTypes.object),
-      presentedIndex: PropTypes.number,
-    }),
-    style: ViewPropTypes.style,
-  };
-
   static Styles = NavigatorBreadcrumbNavigationBarStyles;
 
   _updateIndexProgress(progress, index, fromIndex, toIndex) {
