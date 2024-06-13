@@ -42,12 +42,13 @@ const invariant = require('fbjs/lib/invariant');
 
 const { Map } = require('immutable');
 
-const Interpolators = NavigatorBreadcrumbNavigationBarStyles.Interpolators;
 const NavigatorNavigationBarStyles = Platform.OS === 'android' ?
   NavigatorNavigationBarStylesAndroid : NavigatorNavigationBarStylesIOS;
 
 const NavigatorBreadcrumbNavigationBarStyles = Platform.OS === 'android' ? 
   NavigatorBreadcrumbNavigationBarStylesAndroid : NavigatorBreadcrumbNavigationBarStylesIOS;  
+
+const Interpolators = NavigatorBreadcrumbNavigationBarStyles.Interpolators;
 
 /**
  * Reusable props objects.
