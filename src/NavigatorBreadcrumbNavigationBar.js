@@ -32,7 +32,8 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const NavigatorBreadcrumbNavigationBarStyles = require('./NavigatorBreadcrumbNavigationBarStyles');
+const NavigatorBreadcrumbNavigationBarStylesIOS = require('./NavigatorBreadcrumbNavigationBarStyles.ios');
+const NavigatorBreadcrumbNavigationBarStylesAndroid = require('./NavigatorBreadcrumbNavigationBarStyles.android');
 const NavigatorNavigationBarStylesAndroid = require('./NavigatorNavigationBarStylesAndroid');
 const NavigatorNavigationBarStylesIOS = require('./NavigatorNavigationBarStylesIOS');
 
@@ -44,6 +45,9 @@ const { Map } = require('immutable');
 const Interpolators = NavigatorBreadcrumbNavigationBarStyles.Interpolators;
 const NavigatorNavigationBarStyles = Platform.OS === 'android' ?
   NavigatorNavigationBarStylesAndroid : NavigatorNavigationBarStylesIOS;
+
+const NavigatorBreadcrumbNavigationBarStyles = Platform.OS === 'android' ? 
+  NavigatorBreadcrumbNavigationBarStylesAndroid : NavigatorBreadcrumbNavigationBarStylesIOS;  
 
 /**
  * Reusable props objects.
